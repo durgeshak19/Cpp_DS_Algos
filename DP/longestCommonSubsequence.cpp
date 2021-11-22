@@ -61,10 +61,65 @@ using namespace std;
 //     cout<<"LCS of string : "<<a<<"\nand string : "<<b<<" is\n"<<lcs<<" with size "<<dp[n][m]<<endl;
 // }
 
+
+
+int LCSrecursive(string a , string b ,int n , int m){
+    if(n<= 0  || m<=0){
+        return 0;
+    }
+    if(a[n-1] == b[m-1]){
+        return 1 + LCSrecursive(a,b,n-1,m-1);
+    }
+    else{
+        return max(LCSrecursive(a,b,n-1,m) , LCSrecursive(a,b,n,m-1));
+    }
+    return 0;
+}
+
+
+int LCSTopDown(string a,string b,int n,int m ,int dp[][10]){
+    if(n<=0 || m<=0){
+        return 0;
+    }
+
+    if(dp[n][m] >=0 ){
+        return dp[n][m];
+    }    
+    
+    if(a[n-1] == b[m-1]){
+        dp[n][m] =  1 + LCSrecursive(a,b,n-1,m-1);
+    }
+    else{
+        dp[n][m] =  max(LCSrecursive(a,b,n-1,m) , LCSrecursive(a,b,n,m-1));
+    }
+    return dp[n][m];
+    
+}
+
+void LCSDp(string a,string b ,int n ,int m)
+{
+    int dp[10][10];
+    memset(dp,0,sizeof(dp));
+
+    for(int i=1;i<=n;i++){
+        for(int j=1;j<=m;j++){
+            if(a[i-1] == b[j-1]){
+                dp[i][j] = 1 + dp[i-1][j-1];
+            }
+            else{
+                dp[i][j] = max(dp[i-1][j] , dp[i][j-1]);
+            }
+            
+        }
+    }
+    cout<< dp[n][m];
+}
 int main()
 {
-    string a = "AGGTAB";
-    string b = "GXTXAYB";
+//     string a = "AGGTAB";
+//     string b = "GXTXAYB";
+    string a = "ABCBDAB";
+    string b = "BDCABA";
 
 
     int dp[10][10];
@@ -73,11 +128,12 @@ int main()
     // cout<<"LCS Recursive : "<<LCSrecursive(a,b,a.size(),b.size())<<endl;
     
 
-    cout<<"LCS Top Down : "<<LCSTopDown(a,b,a.size(),b.size(),dp)<<endl;
+    // cout<<"LCS Top Down : "<<LCSTopDown(a,b,a.size(),b.size(),dp)<<endl;
    
     cout<<"LCS Bottom Up ->\n";
-    // LCSDp(a,b,a.size(),b.size());
+    LCSDp(a,b,a.size(),b.size());
     
+
 
     
     return 0;

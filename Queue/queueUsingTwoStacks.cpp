@@ -1,5 +1,5 @@
 #include<bits/stdc++.h>
-
+using namespace std;
 
 stack<int> s1;
 stack<int> s2;
@@ -27,7 +27,7 @@ bool Dequeue(int &value){
 
     if(s2.empty())
         return false;
-    value = s2.pop();
+    value = s2.top();
     s2.pop();
     return true; 
 }

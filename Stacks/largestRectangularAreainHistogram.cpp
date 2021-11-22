@@ -19,10 +19,10 @@ vector<int> nearestSmallestToLeft(vector<int> &v)
 
         if(stk.empty())
             res.push_back(-1);
-        else if(stk.top().first < ele ){
+        else if(stk.top().first >= ele ){
                 res.push_back(stk.top().second);
         }
-        else if(stk.top().first > ele)
+        else if(stk.top().first < ele)
         {
             while(!stk.empty() && stk.top().first > ele)
                 stk.pop();
@@ -54,14 +54,14 @@ vector<int> nearestSmallestToRight(vector<int> &v)
 
         if(stk.empty())
             res.push_back(n);
-        else if(stk.top().first < ele)
+        else if(stk.top().first >= ele)
             res.push_back(stk.top().second);
-        else if(stk.top().first > ele)
+        else if(stk.top().first < ele)
         {
             while(!stk.empty() && stk.top().first > ele)
                 stk.pop();
             if(stk.empty())
-                res.push_back(n);
+                res.push_back(i);
             else
                 res.push_back(stk.top().second);
         }
@@ -90,7 +90,7 @@ void maxAreaHistogram(vector<int> &v)
     vector<int> area(n);
     int mx = INT_MIN;
     for(int i =0 ;i<n;i++){
-        width[i] = right[i] - left[i]-1;
+        width[i] = right[i] - left[i]+1;
         area[i] = v[i] * width[i];
         mx = max(area[i] , mx);
     }
@@ -100,6 +100,6 @@ void maxAreaHistogram(vector<int> &v)
 
 int main()
 {
-    vector<int> v = {6,3,1,4,12,4};
+    vector<int> v = {6,2,5,4,5,1,6};
     maxAreaHistogram(v);
 }

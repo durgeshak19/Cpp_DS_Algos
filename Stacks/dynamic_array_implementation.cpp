@@ -48,14 +48,14 @@ int isEmptyStack(DynArrayStack* S)
 int top(DynArrayStack* S)
 {
     if(isEmptyStack(S))
-        return INT_FAST8_MIN;
+        return INT64_MIN;
     return S->array[S->top]; 
 }
 
 int pop(DynArrayStack* S)
 {
     if(isEmptyStack(S))
-        return INT_FAST8_MIN;
+        return INT64_MIN;
     return S->array[S->top--];
 }
 

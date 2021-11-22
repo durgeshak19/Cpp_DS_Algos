@@ -106,7 +106,7 @@ void maxAreaRectangularMatrix(vector<vector<int>>& mat)
     vector<int> v(mat.size(),0);
     int mx = 0;
 
-    for(int i = 0 ;i<R ;i++)
+    for(int i = 0 ;i<C ;i++)
         v[i] = mat[0][i];
     mx  = maxAreaHistogram(v); 
     for(int i = 1 ; i<R ; i++)

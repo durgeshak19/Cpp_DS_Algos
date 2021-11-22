@@ -1,11 +1,11 @@
-#include<iostream>
-
+#include<bits/stdc++.h>
+using namespace std;
 class ArrayQueue
 {
     public:
     int front,rear;
     int capacity;
-    int *array,
+    int *array;
 };
 
 ArrayQueue* createQueue(int size)

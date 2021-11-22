@@ -11,36 +11,19 @@ void printx(vector<int> &v)
 void stockSpan(vector<int>& v)
 {
     int n = v.size();
-    stack<pair<int,int>> stk;
-    vector<int> res;
-    for(int i=0;i<n;i++)
-    {
-        int ele = v[i];
+    stack<int> stk;
+    vector<int> res(n);
+    res[0] =1;
+    for(int i=1;i<n;i++){
 
-        if(stk.empty())
-            res.push_back(-1);
-        
-        else if(stk.top().first > ele)
-            res.push_back(stk.top().second);
-        
-        else if(stk.top().first <= ele)
-        {
-            while(stk.top().first<=ele && !stk.empty())
-                stk.pop();
-            if(stk.empty())
-                res.push_back(-1);
-            else
-                res.push_back(stk.top().second);
+        while(!stk.empty() && v[stk.top()] <= v[i]  ){
+            stk.pop();
         }
-        
-        stk.push({ele,i});
-    }
 
-    for(int i=0;i<n;i++)
-    {
-        res[i] = i- res[i]; 
+        res[i] = (stk.empty() ? (i+1) : i-stk.top());
+        stk.push(v[i]);
     }
-    printx(res);
+    
 }
 
 
